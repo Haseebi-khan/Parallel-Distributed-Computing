@@ -2,7 +2,7 @@
 #include <omp.h>
 using namespace std;
 
-static long num_step = 900000000;
+static long num_step = 100000;
 
 double step;
 
@@ -15,7 +15,8 @@ int main(int argc, char *argv[]){
     int thread_count = 6; 
 
     double start = omp_get_wtime();
-    #pragma opm parallel for num_threads(thread_count) reduction(+:sum)
+
+    #pragma omp parallel for num_threads(thread_count) reduction(+:sum)    
     for (int i = 0; i < num_step; i++)
     {
         double x = (i + 0.5) * step;
@@ -30,17 +31,28 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-// OUTPUT:
-// int thread_count = 6;  
+// Serial OUTPUT:
+// int thread_count = 1;  
 // n = 100000 
-// Time Taken: 0.00172641
+// Time Taken: 0.00102496
 // Calculated Value: 3.14159
 
+// Parallel OUTPUT:
+// int thread_count = 6;  
+// n = 100000 
+// Time Taken: 0.000956388
+// Calculated Value: 3.14159
 
+// ---------------------------------------
 
+// Serial OUTPUT:
+// int thread_count = 1; 
+// n = 900000000 
+// Time Taken: 10.8486
+// Calculated Value: 3.14159
 
-// OUTPUT:
+// Parallel OUTPUT:
 // int thread_count = 6; 
 // n = 900000000 
-// Time Taken: 10.6992
+// Time Taken: 1.88533
 // Calculated Value: 3.14159
