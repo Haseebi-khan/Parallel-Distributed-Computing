@@ -43,9 +43,6 @@ int main(int argc, char *argv[]){
 // Time Taken: 0.00102496
 // Calculated Value: 3.14159
 
-
-
-
 // OUTPUT:
 // int thread_count = 1; 
 // n = 900000000 
