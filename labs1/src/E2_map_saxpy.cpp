@@ -100,6 +100,7 @@ int main(int argc, char* argv[]) {
     return mismatches != 0;
 }
 
+// ------------    FOR RESULTS CHECK THE RESULT DIR
 
 // Output:
 
@@ -129,3 +130,67 @@ int main(int argc, char* argv[]) {
 // CSV,map,4,20000000,0.080529,0.039059,2.062,0.515
 
 
+
+
+
+
+
+
+
+// Q1: .  Why is it safe to share x, y and zp here? Which rule from §2.5 makes the loop independent?
+
+// ANS: because there is no race condition and each parallel step touches only its own data of array
+// iterations are independent.
+
+// Q2: Why is the verification exact (!= on doubles) and not done with a tolerance? Under which compiler flag 
+// could that stop being true? (Hint: §1.7, -march=native.) 
+// ANS: each zp is computed independently with exactly the same operations in the same order, on
+// the same inputs
+
+
+// Q3: At what thread count does the speedup flatten? 
+// Compare the bandwidth at that point with the bandwidth at p = 1. 
+// The loop does 2 flops per 24 bytes. 
+// Is it limited by arithmetic or by memory? 
+
+// ANS:
+// n == 50000000
+// threads,best_T_serial_s,best_T_parallel_s,speedup,efficiency
+// 4,0.188254,0.097259,1.94,0.48
+//    AT P = 4
+    // BWRatio = t1/t4 = 0.189725/0.097259 = 1.95
+    // BWTotal= data / Execution time = 50000000
+
+
+// Q4: Run with n = 1000 instead. Why can the parallel version be slower than the serial one? Measure the 
+// threshold n where p = 2 starts to win.
+
+// noneo@noneo-Precision-5530:~/A Semester/PDC/Code/pdc/labs1$ ./bin/root 1 1000 5
+// n = 1000, threads = 1, reps = 5
+// verification: PASSED (0 mismatches)
+// T_serial   = 0.000002 s  (10.34 GB/s)
+// T_parallel = 0.000005 s  (5.04 GB/s)
+// speedup S  = 0.49   efficiency E = 0.49
+// CSV,map,1,1000,0.000002,0.000005,0.487,0.487
+// noneo@noneo-Precision-5530:~/A Semester/PDC/Code/pdc/labs1$ ./bin/root 2 1000 5
+// n = 1000, threads = 2, reps = 5
+// verification: PASSED (0 mismatches)
+// T_serial   = 0.000001 s  (19.59 GB/s)
+// T_parallel = 0.000004 s  (6.46 GB/s)
+// speedup S  = 0.33   efficiency E = 0.16
+// CSV,map,2,1000,0.000001,0.000004,0.329,0.165
+// noneo@noneo-Precision-5530:~/A Semester/PDC/Code/pdc/labs1$ 
+
+// At n = 1000 the loop takes only 1 us, but each parallel region has a fixed overhead 
+
+
+
+
+// Q5:The arrays are initialized inside a parallel for. What would change on a two-socket server if the 
+// master thread initialized them alone?
+// ANS:
+// The result stays correct; only performance changes. 
+// If the master initializes alone, 
+// all the data is placed in socket 1 memory. 
+// The threads on socket 2 must then read it remotely from socket 1 memory
+// which is slower, so the program runs slower.
