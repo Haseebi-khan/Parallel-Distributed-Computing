@@ -117,6 +117,66 @@ int main(int argc, char* argv[]) {
 
 
 
+
+// // Q1: Version 1 gives a different answer on different runs. 
+// Draw the interleaving (as in §2.4) that loses an update.
+
+
+// noneo@noneo-Precision-5530:~/A Semester/PDC/Code/pdc/labs1$ for v in 0 1 2 3 4 5; do ./bin/pi_race 2 20000000 $v; done
+// version 0, threads  1, n = 20000000: pi ~ 3.141592603589817, |error| = 5.000e-08, time = 0.0217 s
+// version 1, threads  2, n = 20000000: pi ~ 0.000000050000000, |error| = 3.142e+00, time = 0.0122 s
+// version 2, threads  2, n = 20000000: pi ~ 3.141592603589816, |error| = 5.000e-08, time = 0.6469 s
+// version 3, threads  2, n = 20000000: pi ~ 3.141592603589813, |error| = 5.000e-08, time = 0.7543 s
+// version 4, threads  2, n = 20000000: pi ~ 3.141592603589792, |error| = 5.000e-08, time = 0.0122 s
+// version 5, threads  2, n = 20000000: pi ~ 6.283185207179634, |error| = 3.142e+00, time = 0.0221 s
+// noneo@noneo-Precision-5530:~/A Semester/PDC/Code/pdc/labs1$ for v in 0 1 2 3 4 5; do ./bin/pi_race 2 20000000 $v; done
+// version 0, threads  1, n = 20000000: pi ~ 3.141592603589817, |error| = 5.000e-08, time = 0.0207 s
+// version 1, threads  2, n = 20000000: pi ~ 3.141592553589792, |error| = 1.000e-07, time = 0.0116 s
+// version 2, threads  2, n = 20000000: pi ~ 3.141592603589817, |error| = 5.000e-08, time = 0.5427 s
+// version 3, threads  2, n = 20000000: pi ~ 3.141592603589815, |error| = 5.000e-08, time = 0.8528 s
+// version 4, threads  2, n = 20000000: pi ~ 3.141592603589792, |error| = 5.000e-08, time = 0.0107 s
+// version 5, threads  2, n = 20000000: pi ~ 6.283185207179634, |error| = 3.142e+00, time = 0.0222 s
+// noneo@noneo-Precision-5530:~/A Semester/PDC/Code/pdc/labs1$ for v in 0 1 2 3 4 5; do ./bin/pi_race 2 20000000 $v; done
+// version 0, threads  1, n = 20000000: pi ~ 3.141592603589817, |error| = 5.000e-08, time = 0.0532 s
+// version 1, threads  2, n = 20000000: pi ~ 0.000000050000000, |error| = 3.142e+00, time = 0.0126 s
+// version 2, threads  2, n = 20000000: pi ~ 3.141592603589815, |error| = 5.000e-08, time = 0.5709 s
+// version 3, threads  2, n = 20000000: pi ~ 3.141592603589818, |error| = 5.000e-08, time = 0.7244 s
+// version 4, threads  2, n = 20000000: pi ~ 3.141592603589792, |error| = 5.000e-08, time = 0.0115 s
+// version 5, threads  2, n = 20000000: pi ~ 6.283185207179634, |error| = 3.142e+00, time = 0.0208 s
+// noneo@noneo-Precision-5530:~/A Semester/PDC/Code/pdc/labs1$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // :~/ for v in 0 1 2 3 4 5; do ./bin/pi_race 2 20000000 $v; done
 // version 0, threads  1, n = 20000000: pi ~ 3.141592603589817, |error| = 5.000e-08, time = 0.0459 s
 // version 1, threads  2, n = 20000000: pi ~ 0.000000050000000, |error| = 3.142e+00, time = 0.0121 s
